@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import documentService from "../services/document.service";
 import Button from "../components/Button";
+import { debounce } from "lodash";
 
 const EditorPage = () => {
   const location = useLocation();
@@ -13,6 +14,7 @@ const EditorPage = () => {
   const [text, setText] = useState("");
   const [file, setFile] = useState({});
   const textAreaRef = useRef(null);
+  const [saveStatus, setSaveStatus] = useState("");
 
   useEffect(() => {
     if (data?.id) {
@@ -30,14 +32,42 @@ const EditorPage = () => {
     textAreaRef.current.focus();
   }, []);
 
-  const handleChange = (value) => {
+  const saveDataToBackend = async (value) => {
+    setSaveStatus("Saving...");
+    const res = await documentService.updateDocumentById(file?._id, {
+      data: value,
+      name: file?.name,
+    });
+
+    setTimeout(() => {
+      setSaveStatus("Saved");
+      setTimeout(() => setSaveStatus(""), 2000); // Reset save status after 2 seconds
+    }, 2000);
+  };
+
+  const handleChange = debounce((value) => {
+    saveDataToBackend(value);
+  }, 1000);
+
+  const handleInputChange = (value) => {
     setText(value);
+    handleChange(value);
   };
 
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="flex justify-between px-5 py-3">
-        <span className="w-fit h-fit mt-1 text-yellow-600">{file?.name} :</span>
+        <span className="w-fit h-fit mt-1 text-yellow-600">{file?.name}</span>
+        {saveStatus && (
+          <span
+            style={{
+              color: saveStatus === "Saving..." ? "orange" : "green",
+              marginLeft: "",
+            }}
+          >
+            {saveStatus}
+          </span>
+        )}
 
         <Button
           type="button"
@@ -54,7 +84,7 @@ const EditorPage = () => {
           ref={textAreaRef}
           theme="snow" // or 'bubble' for a bubble theme
           value={text}
-          onChange={handleChange}
+          onChange={handleInputChange}
           placeholder="Start writing..."
         />
       </div>
