@@ -3,6 +3,7 @@ import Card from "../components/Card";
 import { useState, useEffect, useRef } from "react";
 import Modal from "../components/Modal";
 import documentService from "../services/document.service";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -10,6 +11,7 @@ const HomePage = () => {
   const [allDocuments, setAllDocuments] = useState([]);
   const inputRef = useRef(null);
   const [refresh, setRefresh] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -28,6 +30,7 @@ const HomePage = () => {
       data: "",
     });
     if (res) {
+      navigate(`/editor`, { state: { id: res.data._id } });
       setRefresh((prev) => !prev);
       setFileName("");
       setIsOpenModal(false);
@@ -69,7 +72,7 @@ const HomePage = () => {
       </div>
       <div className="grid grid-cols-3 gap-10 mt-3">
         {allDocuments?.map((i) => (
-          <Card key={i} title={i?.name} />
+          <Card key={i?._id} title={i?.name} id={i?._id} />
         ))}
       </div>
     </div>

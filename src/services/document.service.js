@@ -7,15 +7,15 @@ const createDocument = (data) => {
 };
 
 const getDocumentById = (id) => {
-  return axios.get(baseURL + `/api/documents${id}`);
+  return axios.get(baseURL + `/api/documents/${id}`);
 };
 
 const updateDocumentById = (id, data) => {
-  return axios.put(baseURL + `/api/documents${id}`, data);
+  return axios.put(baseURL + `/api/documents/${id}`, data);
 };
 
 const deleteDocumentByID = (e) => {
-  return axios.delete(baseURL + `/api/documents${id}`);
+  return axios.delete(baseURL + `/api/documents/${id}`);
 };
 
 const getAllDocuments = () => {

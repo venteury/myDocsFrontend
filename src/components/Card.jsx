@@ -1,12 +1,19 @@
-const Card = ({ title }) => {
+import { useNavigate } from "react-router-dom";
+
+const Card = ({ title, id = null }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
-      <div className="bg-gray-200 flex justify-center items-center h-40">
+      <div
+        className="bg-gray-200 flex justify-center items-center h-40"
+        onClick={() => navigate(`/editor`, { state: { id } })}
+      >
         <svg
           width="120px"
           height="120px"
           viewBox="-102.4 -102.4 1228.80 1228.80"
-          class="icon"
+          className="icon"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           fill="#000000"
