@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
           <h1 className="text-xl font-bold">My Docs</h1>
         </div>
       </header>
-      <main className="container mx-auto px-4 py-8 flex-grow mt-16 overflow-y-auto">
+      <main className="container mx-auto px-4  flex-grow mt-16 overflow-y-auto overscroll-y-none">
         {children}
       </main>
       {/* <footer className="bg-red-300 text-white py-4 fixed bottom-0 w-full z-10">
