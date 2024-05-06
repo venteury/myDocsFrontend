@@ -3,7 +3,7 @@ import React from "react";
 
 const Layout = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-gray-100 ">
       <header className="bg-red-300 text-white py-4 fixed top-0 w-full z-10">
         <div className="container mx-auto px-4">
           <h1 className="text-xl font-bold">My Docs</h1>
