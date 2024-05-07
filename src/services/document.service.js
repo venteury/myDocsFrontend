@@ -1,5 +1,5 @@
 import axios from "axios";
-let baseURL = "http://localhost:8000";
+let baseURL = "https://mydocsbackend-cnnn.onrender.com";
 
 const createDocument = (data) => {
   console.log(data);
