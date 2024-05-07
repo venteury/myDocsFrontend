@@ -91,7 +91,7 @@ const Card = ({ title, id = null, setRefresh }) => {
           </g>
         </svg>
       </div>
-      <div className="px-6 py-4">
+      <div className="px-6 py-4 bg-white">
         <div className="font-bold text-xl mb-2">
           {" "}
           <Marquee

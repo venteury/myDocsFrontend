@@ -62,7 +62,7 @@ const HomePage = () => {
         </div>
       </Modal>
 
-      <div className="flex justify-end">
+      <div className="flex justify-end mt-2">
         <Button
           className={" bg-slate-400"}
           onClick={() => setIsOpenModal(true)}

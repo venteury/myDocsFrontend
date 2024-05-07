@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import documentService from "../services/document.service";
 import Button from "../components/Button";
 import { debounce } from "lodash";
-import TextEditorInput from "../components/InputEditor";
+// import TextEditorInput from "../components/InputEditor";
 
 const EditorPage = () => {
   const location = useLocation();
@@ -57,7 +57,7 @@ const EditorPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="flex justify-between px-1 py-3">
+      <div className="flex justify-between px-5 py-3">
         <span className="w-fit h-fit mt-1 text-yellow-600">{file?.name}</span>
         {saveStatus && (
           <span
