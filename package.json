@@ -6,13 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "watch:sass": "node-sass SASS/main.scss CSS/style.css -w",
-    "devserver": "live-server",
-    "start": "npm-run-all --parallel devserver watch:sass",
-    "compile:sass": "node-sass SASS/main.scss CSS/style.comp.css",
-    "concat:css": "concat -o CSS/style.concat.css CSS/style.comp.css",
-    "compress:css": "node-sass CSS/style.concat.css --output-style compressed",
-    "build:css": "npm-run-all compile:sass concat:css compress:css",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
