@@ -14,7 +14,7 @@ const updateDocumentById = (id, data) => {
   return axios.put(baseURL + `/api/documents/${id}`, data);
 };
 
-const deleteDocumentByID = (e) => {
+const deleteDocumentByID = (id) => {
   return axios.delete(baseURL + `/api/documents/${id}`);
 };
 

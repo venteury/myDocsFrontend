@@ -1,14 +1,37 @@
 import { useNavigate } from "react-router-dom";
+import Delete from "../assets/delete.png";
+import documentService from "../services/document.service";
+import Marquee from "react-fast-marquee";
 
-const Card = ({ title, id = null }) => {
+const Card = ({ title, id = null, setRefresh }) => {
   const navigate = useNavigate();
+
+  const handleDelete = async (id) => {
+    console.log(id);
+    const res = await documentService.deleteDocumentByID(id);
+    if (res) {
+      setRefresh((prev) => !prev);
+    }
+  };
 
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
       <div
-        className="bg-gray-200 flex justify-center items-center h-40"
+        className="bg-gray-200 flex justify-center items-center h-48 flex-col"
         onClick={() => navigate(`/editor`, { state: { id } })}
       >
+        <div className="flex justify-end w-full mr-8 ">
+          {" "}
+          <img
+            src={Delete}
+            className="w-6 h-6 "
+            alt="delete"
+            onClick={(e) => {
+              handleDelete(id);
+              e.stopPropagation();
+            }}
+          />
+        </div>
         <svg
           width="120px"
           height="120px"
@@ -69,7 +92,15 @@ const Card = ({ title, id = null }) => {
         </svg>
       </div>
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{title}</div>
+        <div className="font-bold text-xl mb-2">
+          {" "}
+          <Marquee
+            pauseOnHover
+            className={`w-full text-center text-blue-500 font-semibold `}
+          >
+            {title}
+          </Marquee>
+        </div>
       </div>
     </div>
   );

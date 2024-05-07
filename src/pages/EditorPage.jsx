@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import documentService from "../services/document.service";
 import Button from "../components/Button";
 import { debounce } from "lodash";
+import TextEditorInput from "../components/InputEditor";
 
 const EditorPage = () => {
   const location = useLocation();
@@ -56,7 +57,7 @@ const EditorPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="flex justify-between px-5 py-3">
+      <div className="flex justify-between px-1 py-3">
         <span className="w-fit h-fit mt-1 text-yellow-600">{file?.name}</span>
         {saveStatus && (
           <span
@@ -72,13 +73,14 @@ const EditorPage = () => {
         <Button
           type="button"
           buttonStyle="outlined"
-          className={"text-red-500"}
+          textColor="text-red-500"
+          className={"text-red-500 hover:text-red-400"}
           onClick={() => navigate(-1)}
         >
           Back
         </Button>
       </div>
-      <div className="w-full min-h-screen bg-white shadow-md rounded-md">
+      <div className="w-full min-h-screen">
         <ReactQuill
           className="quill-editor h-screen"
           ref={textAreaRef}
@@ -87,6 +89,13 @@ const EditorPage = () => {
           onChange={handleInputChange}
           placeholder="Start writing..."
         />
+
+        {/* <TextEditorInput
+          ref={textAreaRef}
+          value={text}
+          onChange={(e) => handleInputChange(e)}
+          placeholder="Start writing..."
+        /> */}
       </div>
     </div>
   );

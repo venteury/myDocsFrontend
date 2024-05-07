@@ -72,7 +72,12 @@ const HomePage = () => {
       </div>
       <div className="grid grid-cols-3 gap-10 mt-3">
         {allDocuments?.map((i) => (
-          <Card key={i?._id} title={i?.name} id={i?._id} />
+          <Card
+            key={i?._id}
+            title={i?.name}
+            id={i?._id}
+            setRefresh={setRefresh}
+          />
         ))}
       </div>
     </div>
