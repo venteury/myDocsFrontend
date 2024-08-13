@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "./config";
-// let baseURL = "https://mydocsbackend-cnnn.onrender.com";
-let baseURL = "http://localhost:8000";
+let baseURL = "https://mydocsbackend-cnnn.onrender.com";
+// let baseURL = "http://localhost:8000";
 
 const createDocument = (data) => {
   console.log(data);
