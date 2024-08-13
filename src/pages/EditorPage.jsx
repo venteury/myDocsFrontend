@@ -5,8 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import documentService from "../services/document.service";
 import Button from "../components/Button";
-import { debounce } from "lodash";
-// import TextEditorInput from "../components/InputEditor";
+import useDebounce from "../hooks/useDebounce";
 
 const EditorPage = () => {
   const location = useLocation();
@@ -16,6 +15,8 @@ const EditorPage = () => {
   const [file, setFile] = useState({});
   const textAreaRef = useRef(null);
   const [saveStatus, setSaveStatus] = useState("");
+
+  const debounceValue = useDebounce(text);
 
   useEffect(() => {
     if (data?.id) {
@@ -40,19 +41,20 @@ const EditorPage = () => {
       name: file?.name,
     });
 
-    setTimeout(() => {
-      setSaveStatus("Saved");
-      setTimeout(() => setSaveStatus(""), 2000); // Reset save status after 2 seconds
-    }, 2000);
+    if (res) {
+      setTimeout(() => {
+        setSaveStatus("Saved");
+        setTimeout(() => setSaveStatus(""), 2000); // Reset save status after 2 seconds
+      }, 2000);
+    }
   };
 
-  const handleChange = debounce((value) => {
-    saveDataToBackend(value);
-  }, 1000);
+  useEffect(() => {
+    if (debounceValue) saveDataToBackend(debounceValue);
+  }, [debounceValue]);
 
   const handleInputChange = (value) => {
     setText(value);
-    handleChange(value);
   };
 
   return (
@@ -89,13 +91,6 @@ const EditorPage = () => {
           onChange={handleInputChange}
           placeholder="Start writing..."
         />
-
-        {/* <TextEditorInput
-          ref={textAreaRef}
-          value={text}
-          onChange={(e) => handleInputChange(e)}
-          placeholder="Start writing..."
-        /> */}
       </div>
     </div>
   );
